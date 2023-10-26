@@ -1,0 +1,6 @@
+[aws_servers]
+3.83.254.781
+
+[aws_servers:vars]
+ansible_user = ubuntu
+ansible_ssh_private_key_file = "/Users/hritik/ssh_keys/hritik1999.pem"

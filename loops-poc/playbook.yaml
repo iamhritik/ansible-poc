@@ -1,0 +1,33 @@
+---
+- name: Loops POC playbook
+  hosts: all
+  gather_facts: false
+  vars:
+    myinfo:
+      name: hritik
+      age: 22
+      game: cricket
+  tasks:
+    - name: testing loop control
+      command: echo {{ item.name }}
+      loop:
+        - name: hritik
+          age: 22
+          game: cricket
+      loop_control:
+        label: "{{ item.age }}"
+
+    - name: testing loop control
+      command: echo {{ item.key }} - {{ item.value }}
+      loop: '{{ myinfo|dict2items }}'
+
+
+    - name: testing loop restry
+      command: /usr/bin/flase
+      register: result
+      retries: 3
+      delay: 2
+      until: result.rc == 0
+
+    - name: hello world
+      command: echo "hello world"
