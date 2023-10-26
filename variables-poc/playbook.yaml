@@ -1,0 +1,32 @@
+---
+- name: Testing different variables
+  hosts: all
+  gather_facts: false
+  vars_prompt:
+    - name: nameo
+      private: false
+      prompt: "Enter your name" 
+      salt_size: 8
+      unsafe: false
+  # vars_files:
+  #   - variables.yaml
+  # vars:
+  #   names:
+  #     - hritik
+  #     - gaurav
+  #     - hitesh
+  #   name_kv:
+  #     - age: 22
+  tasks:
+    # - name: Run echo command
+    #   command: echo {{ item['age'] }}
+    #   loop: "{{ name_kv }}"
+    - name: Run echo command-1
+      command: echo {{ nameo }}
+      register: echo_out
+    - name: Debug echo_out command
+      debug:
+        var: echo_out.stdout
+    # - name: Run echo command-2
+    #   command: echo {{ item.age }}
+    #   loop: "{{ name_kv }}"

@@ -1,0 +1,18 @@
+---
+- name: Conditions check playbook
+  hosts: all
+  gather_facts: true
+  vars:
+    greetings: "hello world"
+  tasks:
+    - name: echo command
+      command: echo "Hello world"
+      register: echoData
+
+    - name: Condition when checking
+      command: echo {{ greetings }}
+      failed_when: '"Helloi" in echoData.stdout'
+
+    - name: Print all available facts
+      debug:
+        var: ansible_facts["distribution"]
