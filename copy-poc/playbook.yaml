@@ -1,0 +1,25 @@
+---
+- name: Copy module poc
+  hosts: all
+  gather_facts: true
+  tasks:
+    - name: create a file with contents
+      copy:
+        dest: /home/ubuntu/copy.txt
+        content: "Hello world"
+        mode: 0666
+        owner: ubuntu
+        group: ubuntu
+      when: ansible_facts["distribution"] == "Ubuntu"
+
+    - name: copy file from local to remove
+      copy:
+        src: /home/ubuntu/copy.txt
+        dest: /home/ubuntu/copy4.txt
+        mode: 0666
+        owner: ubuntu
+        group: ubuntu
+        backup: true
+        remote_src: true
+        validate: cat %s
+      when: ansible_facts["distribution"] == "Ubuntu"
