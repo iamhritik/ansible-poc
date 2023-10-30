@@ -1,6 +1,6 @@
 [aws_servers]
-54.144.2.36
-54.205.70.146
+54.144.2.3
+54.205.70.14
 
 [aws_servers:vars]
 ansible_user = ubuntu
