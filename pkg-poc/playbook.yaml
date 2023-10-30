@@ -1,0 +1,25 @@
+---
+- name: Package management poc
+  hosts: all
+  gather_facts: false
+  vars:
+    pkg:
+      - apache2
+      - nginx
+  tasks:
+    - name: apt update
+      apt:
+        update_cache: true
+      become: true
+
+    - name: clean local repo
+      apt:
+        autoclean: true
+      become: true
+
+    - name: Install required packages
+      apt:
+        name: "{{ item }}"
+        state: fixed
+      loop: '{{ pkg }}'
+      become: true
