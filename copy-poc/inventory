@@ -1,5 +1,5 @@
 [aws_servers]
-54.205.70.16
+54.205.70.1
 54.1442.36
 
 [aws_servers:vars]
