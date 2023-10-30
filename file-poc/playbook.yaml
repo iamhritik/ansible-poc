@@ -1,0 +1,32 @@
+---
+- name: File module poc
+  hosts: all
+  gather_facts: false
+  tasks:
+    - name: create a new dir
+      file:
+        path: /home/ubuntu/hola/test
+        owner: root
+        group: ubuntu
+        mode: 0777
+        state: directory
+      become: true
+
+    - name: create a new file
+      file:
+        path: /home/ubuntu/test.txt
+        owner: root
+        group: ubuntu
+        mode: 0777
+        state: touch
+      become: true
+
+    - name: change dir ownership
+      file:
+        path: /home/ubuntu/hola
+        state: absent
+        owner: ubuntu
+        group: root
+        mode: 0444
+        modification_time: now
+      become: true
