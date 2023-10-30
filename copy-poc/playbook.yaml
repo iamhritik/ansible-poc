@@ -21,5 +21,4 @@
         group: ubuntu
         backup: true
         remote_src: true
-        validate: cat %s
       when: ansible_facts["distribution"] == "Ubuntu"
