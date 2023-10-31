@@ -1,0 +1,39 @@
+---
+- name: lineinfile poc
+  hosts: all
+  gather_facts: false
+  tasks:
+  # - name: Change line in a file
+  #   lineinfile:
+  #     path: /home/ubuntu/line.txt
+  #     search_string: 'Subsystem'
+  #     line: Subsystem hello world
+  #     state: present
+
+  # - name: Change line in a file
+  #   lineinfile:
+  #     path: /home/ubuntu/line.txt
+  #     regex: '^Subsystem'
+  #     line: Subsystem hello2
+  #     state: present
+  #     firstmatch: true
+
+  # - name: Change line in a file
+  #   lineinfile:
+  #     path: /home/ubuntu/line.txt
+  #     line: Testing lineinfile
+  #     state: present
+
+  - name: Change line in a file
+    lineinfile:
+      path: /home/ubuntu/line.txt
+      insertafter: '#here'
+      line: SubsystemHello
+      state: present
+
+  - name: Change line in a file
+    lineinfile:
+      path: /home/ubuntu/line.txt
+      insertbefore: '#before'
+      line: SubsystemHello world
+      state: present
