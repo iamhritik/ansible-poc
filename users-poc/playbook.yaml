@@ -1,0 +1,33 @@
+---
+- name: users module poc
+  hosts: all
+  gather_facts: false
+  vars:
+    passwordo: "dev@1234#"
+  tasks:
+    - name: create new user - dev
+      user:
+        name: dev
+        comment: Dev User
+        create_home: true
+        home: /home/devo
+        system: true
+        shell: /bin/bash
+        groups: admin
+        generate_ssh_key: true
+        ssh_key_bits: 4096
+        password: "{{ passwordo| password_hash('sha512') }}"
+      become: true
+
+    - name: delete new user - dev
+      user:
+        name: dev
+        state: absent
+        force: true
+      become: true
+    
+    - name: Delete dev home dir
+      file:
+        path: /home/devo
+        state: absent
+      become: true

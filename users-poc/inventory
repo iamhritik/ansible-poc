@@ -1,0 +1,8 @@
+[aws_servers]
+18.206.226.197
+54.145.135.58
+
+
+[aws_servers:vars]
+ansible_user = ubuntu
+ansible_ssh_private_key_file = "/home/opstree/ssh_keys/hritik1999.pem"
