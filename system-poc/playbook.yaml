@@ -1,0 +1,26 @@
+---
+- name: System module poc
+  hosts: all
+  gather_facts: false
+  tasks:
+    - name: collect facts about system services
+      service_facts:
+      register: services_state
+
+    - name: Debug
+      debug:
+        var: services_state.ansible_facts.services['nginx.service'].state
+
+    - name: masked nginx service
+      systemd:
+        name: nginx
+        masked: true
+      become: true
+
+    - name: start nginx and enable it
+      systemd:
+        name: nginx
+        daemon_reload: true
+        enabled: true
+        state: started
+      become: true
